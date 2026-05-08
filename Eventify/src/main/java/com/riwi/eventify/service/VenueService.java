@@ -27,6 +27,7 @@ public class VenueService {
         }
         venueRepository.save(venue);
     }
-
-
+    public List<Venue> findAll() {
+        return venueRepository.findAll();
+    }
 }
