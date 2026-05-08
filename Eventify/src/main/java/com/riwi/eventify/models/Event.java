@@ -22,4 +22,5 @@ public class Event {
     @Schema(description = "Descripcion del evento", example = "Increible concierto de Arcangel con invitados especiales")
     private String description;
 
+
 }
