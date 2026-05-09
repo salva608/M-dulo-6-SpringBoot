@@ -13,20 +13,19 @@ public class VenueService {
 
     private final VenueRepository venueRepository;
 
-    public void save(Venue venue) {
+    public Venue save(Venue venue) {
         if (venue.getName() == null || venue.getName().isBlank()) {
             throw new IllegalArgumentException("El nombre del lugar no puede estar vacio");
         }
-
         if (venue.getAddress() == null || venue.getAddress().isBlank()) {
             throw new IllegalArgumentException("La direccion no puede quedar vacia");
         }
-
         if (venue.getCapacity() <= 0) {
             throw new IllegalArgumentException("La capacidad debe ser mayor de 0");
         }
-        venueRepository.save(venue);
+        return venueRepository.save(venue);
     }
+
     public List<Venue> findAll() {
         return venueRepository.findAll();
     }

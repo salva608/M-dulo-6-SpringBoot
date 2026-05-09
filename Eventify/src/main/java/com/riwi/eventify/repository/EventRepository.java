@@ -6,13 +6,15 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Repository
 public class EventRepository {
     private List<Event> events = new ArrayList<>();
+    private Long currentId = 1L;
 
-    public void save(Event event) {
+    public Event save(Event event) {
+        event.setId(currentId++);
         events.add(event);
+        return event;
     }
 
     public List<Event> findAll() {
@@ -20,10 +22,8 @@ public class EventRepository {
     }
 
     public Event findById(Long id) {
-        //stream() Convierte la lista en flujo para poder filtrar.
         return events.stream()
                 .filter(e -> e.getId().equals(id))
-                //findFirst() Obtiene el primero encontrado.
                 .findFirst()
                 .orElse(null);
     }
@@ -31,7 +31,4 @@ public class EventRepository {
     public boolean deleteById(Long id) {
         return events.removeIf(e -> e.getId().equals(id));
     }
-
-
-
 }
