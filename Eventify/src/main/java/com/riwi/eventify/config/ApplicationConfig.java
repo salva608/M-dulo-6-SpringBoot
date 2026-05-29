@@ -17,7 +17,7 @@ public class ApplicationConfig {
     public CommandLineRunner loadData(EventRepository eventRepo, VenueRepository venueRepo) {
         return args -> {
             // Pasamos 'null' en el ID para que Hibernate use el autoincremento (IDENTITY) de forma correcta
-            Venue place = new Venue(null, "Auditorio Riwi", "Calle 123", 100);
+            Venue place = new Venue(null, "Auditorio Riwi", "Medellin","Calle 123", 100);
             Event party = new Event(null, "Spring Boot Workshop", LocalDate.now(), "Aprenderás DI");
 
             // Guardado seguro en la base de datos en memoria

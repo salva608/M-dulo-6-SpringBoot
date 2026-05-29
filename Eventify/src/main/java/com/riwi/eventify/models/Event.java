@@ -59,6 +59,14 @@ public class Event {
     @Schema(description = "Categorías temáticas asociadas al evento")
     private Set<Category> categories = new HashSet<>();
 
+    public Event(Long id, String name, LocalDate date, String description) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.description = description;
+        this.active = true;
+    }
+
     // Requerimiento: Método para ejecutar el borrado lógico de forma semántica
     public void softDelete() {
         this.active = false;
