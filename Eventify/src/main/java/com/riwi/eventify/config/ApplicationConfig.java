@@ -1,4 +1,4 @@
-package com.riwi.eventify.config;
+/*package com.riwi.eventify.config;
 
 import com.riwi.eventify.models.Event;
 import com.riwi.eventify.models.Venue;
@@ -28,3 +28,4 @@ public class ApplicationConfig {
         };
     }
 }
+*/
