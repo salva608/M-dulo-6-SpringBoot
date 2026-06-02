@@ -34,7 +34,7 @@
             font-weight: 600;
             color: #34495e;
         }
-        input[type="text"], input[type="date"], textarea {
+        input[type="text"], input[type="date"], textarea, select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -43,7 +43,7 @@
             font-family: inherit;
             font-size: 1em;
         }
-        input[type="text"]:focus, input[type="date"]:focus, textarea:focus {
+        input[type="text"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
             border-color: #3498db;
             outline: none;
             box-shadow: 0 0 5px rgba(52,152,219,0.3);
@@ -51,6 +51,26 @@
         textarea {
             resize: vertical;
             height: 100px;
+        }
+        /* Contenedor estético para los checkboxes */
+        .checkbox-container {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 15px;
+            background-color: #fefefe;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .checkbox-item input {
+            margin-right: 10px;
+            transform: scale(1.2);
+            cursor: pointer;
         }
         .btn-group {
             margin-top: 25px;
@@ -89,7 +109,7 @@
 <div class="container">
     <h1>Registrar Nuevo Evento</h1>
 
-    <form th:action="@{/admin/events/save}" th:object="${event}" method="post">
+    <form th:action="@{/events}" th:object="${event}" method="post">
 
         <div class="form-group">
             <label for="name">Nombre del Evento:</label>
@@ -106,9 +126,33 @@
             <textarea id="description" th:field="*{description}" placeholder="Escribe detalles significativos del evento aquí..." required maxlength="500"></textarea>
         </div>
 
+        <div class="form-group">
+            <label for="venue" style="color: #2980b9;">Sede Asignada (Obligatoria):</label>
+            <select id="venue" th:field="*{venue}" required>
+                <option value="" disabled selected>-- Seleccione el Lugar --</option>
+                <option th:each="v : ${venues}"
+                        th:value="${v.id}"
+                        th:text="${v.name + ' (' + v.city + ')'}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label style="color: #2980b9;">Categorías del Evento:</label>
+            <div class="checkbox-container">
+                <div th:each="cat : ${categories}" class="checkbox-item">
+                    <input type="checkbox"
+                           th:value="${cat.id}"
+                           th:field="*{categories}"
+                           th:id="${'cat-' + cat.id}">
+                    <label th:for="${'cat-' + cat.id}" th:text="${cat.name}" style="font-weight: normal; display: inline; margin: 0; cursor: pointer;"></label>
+                </div>
+                <div th:if="${#lists.isEmpty(categories)}" style="color: #7f8c8d; font-size: 0.9em;">No hay categorías en el sistema.</div>
+            </div>
+        </div>
+
         <div class="btn-group">
             <button type="submit" class="btn">💾 Guardar Registro</button>
-            <a th:href="@{/admin/events}" class="btn-cancel">Cancelar</a>
+            <a th:href="@{/events}" class="btn-cancel">Cancelar</a>
         </div>
     </form>
 </div>
