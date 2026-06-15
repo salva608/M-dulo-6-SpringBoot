@@ -3,6 +3,7 @@ package com.riwi.eventify.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,9 @@ public class Venue {
     @Column(nullable = false, length = 255)
     @Schema(description = "Nombre completo del lugar", example = "Riwi")
     private String name;
+    @Column(nullable = false)
+    @Schema(description = "Direccion del lugar", example = "Medellin")
+    private String city;
     @Column(nullable = false, length = 100)
     @Schema(description = "Direccion del lugar", example = "Carrera 63a #74-72")
     private String address;
